@@ -1,10 +1,9 @@
 <html>
-
 <body>
     <link rel = "stylesheet" href = "styles.css">
     <img src = "header.jpg" />
     
-    <h1> Insert Task</h1> </br>
+    <h1>Insert Many</h1> </br>
     <h1>
         <a href="/">Insert New Task</a>
         <a href="/gettasks">Get All Tasks</a>
@@ -12,7 +11,8 @@
         <a href="/deletecomplete">Delete All Completed Tasks</a>
         <a href="/updatetask">UpdateTask</a>
     </h1>
-    <form action="/addnewtask" method="POST">
+
+    <form action="/addNewMultiTask" method="POST">
         Task Name <input type="text" method="POST" name="tname" /> </br>
         Assign to <input type="text" method="POST" name="tassign" /> </br>
         Due Date <input type="date" method="POST" name="tdate" /> </br>
@@ -25,5 +25,6 @@
         Task Description <input type="text" method="POST" name="tdesc" /> </br>
         <input type="submit" value="Submit" /> </br>
     </form>
+    
 </body>
 </html>

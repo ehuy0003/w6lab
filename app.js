@@ -68,7 +68,6 @@ app.get('/deletetask', function (req, res) {
 app.post('/deletetaskdata', function (req, res) {
     let taskDetails = req.body;
     let filter = { id: taskDetails.tid };
-    //console.log(filter);
     col.deleteOne(filter);
     res.redirect('/gettasks');// redirect the client to list users page
 });
