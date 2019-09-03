@@ -19,26 +19,30 @@ app.use(express.static(__dirname + "/css"));
 let db = {};
 let col = null;
 let url = "mongodb://localhost:27017";
-mongoDBClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client){
+mongoDBClient.connect(url, { useNewUrlParser: true }, function (err, client){
 
-    db = client.db("week5lab"); //name for db
-    col = db.collection("tasks"); // Name for the collection(table)
+    if (err) {
+        console.log('Err  ', err);
+    } else {
+        console.log("Connected successfully to server");
+        db = client.db("w6lab"); //name for db
+        col = db.collection("Tasks"); // Name for the collection(table)
+    }
 
 });
 
 //GET INDEX PAGE
 app.get('/',function(req,res){
     res.sendFile(__dirname + "/views/index.html");
-    
-    
 }); 
 
 //POST INSERT
 app.post('/addnewtask', function (req, res) {
     let taskDetails = req.body;
+    let randNum = "" + Math.floor(100000 + Math.random() * 900000);
     
     col.insertOne({
-        id: "" + Math.floor(100000 + Math.random() * 900000), 
+        id: randNum, 
         name:taskDetails.tname, 
         assigned:taskDetails.tassign, 
         due:taskDetails.tdate,  
