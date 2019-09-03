@@ -12,9 +12,9 @@ let app = express();
 
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.use(express.static(__dirname+"/views"));
-app.use(express.static(__dirname+"/img"));
-app.use(express.static(__dirname+"/css"));
+app.use(express.static(__dirname + "/views"));
+app.use(express.static(__dirname + "/img"));
+app.use(express.static(__dirname + "/css"));
 
 let db = {};
 let col = null;
@@ -23,7 +23,6 @@ mongoDBClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, 
 
     db = client.db("week5lab"); //name for db
     col = db.collection("tasks"); // Name for the collection(table)
-
 
 });
 
@@ -46,7 +45,7 @@ app.post('/addnewtask', function (req, res) {
         status:taskDetails.tstatus,
         description:taskDetails.tdesc
     });
-    res.redirect("/gettasks"); 
+    res.redirect("/gettasks"); // redirects the client to list users page
 });
 
 // GET ALL TASKS PAGE
@@ -58,7 +57,7 @@ app.get('/gettasks',function(req,res){
 
 // GET DELETE TASK
 app.get('/deletetask', function (req, res) {
-    res.sendFile(__dirname + '/views/deletetask.html');
+    res.render(__dirname + '/views/deletetask.html');
 });
 
 // POST DELETE TASK
@@ -72,20 +71,19 @@ app.post('/deletetaskdata', function (req, res) {
 
 // GET DELETE COMPLETED TASK
 app.get('/deletecomplete', function (req, res) {
-    res.sendFile(__dirname + '/views/deletecomplete.html');
+    res.render(__dirname + '/views/deletecomplete.html');
 });
 
 // POST DELETE TASK
 app.post('/deletecompletedata', function (req, res) {
-    let taskDetails = req.body;
     let filter = { status: "C" };
     col.deleteOne(filter);
-    res.redirect('/gettasks');// redirect the client to list users page
+    res.render('/gettasks');// redirect the client to list users page
 });
 
 // GET UPDATE TASK
 app.get('/updatetask', function (req, res) {
-    res.sendFile(__dirname + '/views/updatetask.html');
+    res.render(__dirname + '/views/updatetask.html');
 });
 
 // POST UPDATE DATA
