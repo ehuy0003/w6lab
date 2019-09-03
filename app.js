@@ -17,7 +17,7 @@ app.use(express.static(__dirname+"/img"));
 app.use(express.static(__dirname+"/css"));
 
 let db = {};
-let col = ull;
+let col = null;
 let url = "mongodb://localhost:27017";
 mongoDBClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client){
 
@@ -100,4 +100,4 @@ app.post('/updatetaskdata', function (req, res) {
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-app.listen(8000);
+app.listen(8080);
